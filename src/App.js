@@ -1,8 +1,6 @@
 import "./styles.css";
-import * as THREE from "three";
-import { Canvas } from "@react-three/fiber";
-import { useLoader } from "@react-three/fiber";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Canvas, useLoader } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 import { Suspense } from "react";
@@ -13,20 +11,19 @@ const Scene = () => {
     materials.preload();
     loader.setMaterials(materials);
   });
-
   return (
     <>
       {/* 3D 모델 */}
-      <primitive object={obj} scale={0.4} />
-      
+      <primitive object={obj} scale={1.0} position={[ 60, 60, -10 ]} />
+
       {/* Ambient Light */}
-      <ambientLight intensity={3} />
+      <ambientLight intensity={0.5} />
       
       {/* Directional Light */}
-      <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
+      <directionalLight position={[5, 5, 5]} intensity={0.5} castShadow />
       
       {/* Point Light */}
-      <pointLight position={[0, 10, 0]} intensity={3} />
+      <pointLight position={[0, 10, 0]} intensity={2} />
       
       {/* Spot Light */}
       <spotLight position={[5, 5, 5]} angle={0.3} intensity={1} castShadow />
@@ -35,12 +32,13 @@ const Scene = () => {
 };
 
 export default function App() {
+
   return (
     <div className="App">
-      <Canvas shadowMap style={{ background: 'black' }} >
+      <Canvas>
         <Suspense fallback={null}>
+          <OrbitControls target={[0, 10, -10]}/>
           <Scene />
-          <OrbitControls />
         </Suspense>
       </Canvas>
     </div>
