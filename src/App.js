@@ -11,33 +11,33 @@ const Scene = () => {
     materials.preload();
     loader.setMaterials(materials);
   });
+
   return (
     <>
       {/* 3D 모델 */}
-      <primitive object={obj} scale={1.0} position={[ 60, 60, -10 ]} />
+      <primitive object={obj} scale={1.0} position={[60, 60, -10]} />
 
       {/* Ambient Light */}
-      <ambientLight intensity={0.5} />
-      
+      <ambientLight intensity={1.0} />
+
       {/* Directional Light */}
-      <directionalLight position={[5, 5, 5]} intensity={0.5} castShadow />
-      
+      <directionalLight position={[100, 100, 100]} intensity={1.5} castShadow />
+
       {/* Point Light */}
-      <pointLight position={[0, 10, 0]} intensity={2} />
-      
+      <pointLight position={[0, 200, 0]} intensity={2.0} />
+
       {/* Spot Light */}
-      <spotLight position={[5, 5, 5]} angle={0.3} intensity={1} castShadow />
+      <spotLight position={[50, 50, 50]} angle={0.5} intensity={2.0} castShadow />
     </>
   );
 };
 
 export default function App() {
-
   return (
     <div className="App">
       <Canvas>
         <Suspense fallback={null}>
-          <OrbitControls target={[0, 10, -10]}/>
+          <OrbitControls target={[0, 10, -10]} />
           <Scene />
         </Suspense>
       </Canvas>
